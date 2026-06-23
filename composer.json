@@ -1,0 +1,71 @@
+{
+    "name": "mohammedmanssour/failed-jobs-model",
+    "description": "An Eloquent model, query scopes, and Artisan commands to inspect, analyze, and prune Laravel's failed_jobs table — with an indexed display_name for fast lookups and stats.",
+    "keywords": [
+        "laravel",
+        "laravel queue",
+        "failed jobs",
+        "queue monitoring",
+        "failed-jobs-model"
+    ],
+    "homepage": "https://github.com/mohammedmanssour/failed-jobs-model",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mohammed Manssour",
+            "email": "hello@mohammedmanssour.me",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.4",
+        "spatie/laravel-package-tools": "^1.16",
+        "illuminate/contracts": "^11.0||^12.0||^13.0"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.14",
+        "nunomaduro/collision": "^8.8",
+        "orchestra/testbench": "^11.0.0||^10.0.0||^9.0.0",
+        "pestphp/pest": "^4.0",
+        "pestphp/pest-plugin-arch": "^4.0",
+        "pestphp/pest-plugin-laravel": "^4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "MohammedManssour\\FailedJobsModel\\": "src/",
+            "MohammedManssour\\FailedJobsModel\\Database\\Factories\\": "database/factories/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MohammedManssour\\FailedJobsModel\\Tests\\": "tests/",
+            "Workbench\\App\\": "workbench/app/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": "@composer run prepare",
+        "prepare": "@php vendor/bin/testbench package:discover --ansi",
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage",
+        "format": "vendor/bin/pint"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "MohammedManssour\\FailedJobsModel\\FailedJobsModelServiceProvider"
+            ],
+            "aliases": {
+                "FailedJobsModel": "MohammedManssour\\FailedJobsModel\\Facades\\FailedJobsModel"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
