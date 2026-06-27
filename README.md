@@ -11,7 +11,7 @@ An Eloquent model, query scopes, and Artisan commands to inspect, analyze, and p
 composer require mohammedmanssour/failed-jobs-model
 ```
 
-The package adds a `display_name` column (a generated column derived from `payload->displayName`) and an index on it. The migration runs automatically with:
+The package adds a `display_name` column (a generated column derived from `payload->displayName`) and a compound index on `[display_name, failed_at]` — so class-name lookups also satisfy the default `failed_at` ordering from the same index, with no filesort. The migration runs automatically with:
 
 ```bash
 php artisan migrate

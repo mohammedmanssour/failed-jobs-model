@@ -30,14 +30,17 @@ return new class extends Migration
                 ? $column->storedAs($expression)
                 : $column->virtualAs($expression);
 
-            $table->index('display_name');
+            // Compound index: display_name filters, failed_at serves the
+            // latestFailed global scope's "order by failed_at desc" from the
+            // same index, so display_name lookups avoid a filesort entirely.
+            $table->index(['display_name', 'failed_at']);
         });
     }
 
     public function down()
     {
         Schema::table('failed_jobs', function (Blueprint $table) {
-            $table->dropIndex(['display_name']);
+            $table->dropIndex(['display_name', 'failed_at']);
             $table->dropColumn('display_name');
         });
     }
